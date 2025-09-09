@@ -7,7 +7,7 @@ res = Array.new(d, 0)
 lr_ary.each do |lr|
   l,r = lr
   res[l - 1] +=1
-  res[r] -=1
+  res[r] -=1 if r < res.size
 end
 
 res.each_with_index do |i, idx|
