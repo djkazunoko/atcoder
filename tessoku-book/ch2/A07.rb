@@ -6,8 +6,13 @@ res = Array.new(d, 0)
 
 lr_ary.each do |lr|
   l,r = lr
-  (l..r).each do |day|
-    res[day - 1] += 1
+  res[l - 1] +=1
+  res[r] -=1
+end
+
+res.each_with_index do |i, idx|
+  if idx > 0
+    res[idx] = i + res[idx - 1]
   end
 end
 
