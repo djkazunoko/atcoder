@@ -13,8 +13,8 @@ end
 r_cnt = right.count(1) + right.size
 
 left.each_with_index do |n, idx|
-  if n == 1
-    left.shift(idx+1)
+  if n == 0
+    left.shift(idx)
     break
   end
 end
