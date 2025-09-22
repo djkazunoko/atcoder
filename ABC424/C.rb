@@ -1,25 +1,22 @@
 N = gets.to_i
-ab_ary_ary = []
-N.times do
-  ab_ary_ary << gets.split.map(&:to_i)
+g = Array.new(N+1) { [] }
+
+(1..N).each do |i|
+  a, b = gets.split.map(&:to_i)
+  g[a] << i
+  g[b] << i
 end
 
-skills = []
+ok = Array.new(N+1, false)
+ok[0] = true
 
-ab_ary_ary.each_with_index do |ab_ary, idx|
-  if ab_ary[0] == 0 && ab_ary[1] == 0
-    skills << idx + 1
+def dfs(v, g, ok)
+  ok[v] = true
+  g[v].each do |vv|
+    dfs(vv, g, ok) unless ok[vv]
   end
 end
 
-ab_ary_ary.each_with_index do |ab_ary, idx|
-  if ab_ary[0] == 0 && ab_ary[1] == 0
-    next
-  end
+dfs(0, g, ok)
 
-  if skills.include?(ab_ary[0]) || skills.include?(ab_ary[1])
-    skills << idx + 1
-  end
-end
-
-p skills.count
+puts ok.count(true) - 1
