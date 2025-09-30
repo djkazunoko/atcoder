@@ -27,9 +27,7 @@ q[-1] = a_ary[-1]
   end
 end
 
-res = []
 lr_ary_ary.each do |lr_ary|
   l,r = lr_ary
-  res << p[..(l-2)].concat(q[r..]).max
+  puts [p[l-2], q[r]].max
 end
-puts res
