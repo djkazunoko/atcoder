@@ -1,6 +1,6 @@
 n = gets.to_i
-res = []
+res = 0
 (1..n).each do |i|
-  res << (-1)**i * i**3
+  res += (-1)**i * i**3
 end
-p res.sum
+p res
