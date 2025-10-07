@@ -4,16 +4,16 @@ query_ary = []
 q.times do
   query_ary << gets.split.map(&:to_i)
 end
-
+b_ary = a_ary.concat a_ary
+x = 0
 query_ary.each do |query|
   if query.length == 2
     c = query.last
-    c.times do
-      a_ary.push a_ary.shift
-    end
+    x += c
   else
     l = query[1]
     r = query[2]
-    puts a_ary[l-1..r-1].sum
+    y = x % n
+    puts b_ary[(l - 1 + y)..(r - 1 + y)].sum
   end
 end
