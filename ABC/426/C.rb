@@ -1,14 +1,19 @@
 n,q = gets.split.map(&:to_i)
-upgrades = q.times.map { gets.split.map(&:to_i) }
 
-pc = Array.new(n) {|i| i + 1}
+pc = Array.new(n + 1, 1)
+pc[0] = 0
 
-upgrades.each do |xy|
-  x,y = xy
-  old_num = pc.select {|v| v <= x}.length
-  puts old_num
-  if old_num > 0
-    pc[0..old_num - 1] = Array.new(old_num, y)
-    pc.sort!
+o = 1
+q.times do
+  x,y = gets.split.map(&:to_i)
+  res = 0
+
+  while o <= x
+    res += pc[o]
+    pc[y] += pc[o]
+    pc[o] = 0
+    o += 1
   end
+
+  puts res
 end
