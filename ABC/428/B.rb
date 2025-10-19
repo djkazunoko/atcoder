@@ -1,26 +1,13 @@
 n,k = gets.chomp.split.map(&:to_i)
-s = gets.chomp.chars
+s = gets.chomp
 
-t_ary = []
-(1..(n-k+1)).each do |i|
-  t_ary << s[(i-1)..((i-1)+k-1)].join
+memo = Hash.new(0)
+(0..(n-k)).each do |i|
+  t = s[i, k]
+  memo[t] += 1
 end
 
-x = 0
-t_ary.uniq.each do |t|
-  y = t_ary.count(t)
-  if y > x
-    x = y
-  end
-end
-
-x_ary = []
-t_ary.uniq.each do |t|
-  y = t_ary.count(t)
-  if y == x
-    x_ary << t
-  end
-end
+x = memo.values.max
 
 puts x
-puts x_ary.sort.join(' ')
+puts memo.select {|k,v| v == x}.keys.sort.join(' ')
