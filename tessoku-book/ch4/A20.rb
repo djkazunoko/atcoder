@@ -1,24 +1,20 @@
 s = gets.chomp
 t = gets.chomp
 
-# 左上に番兵を追加
-s.prepend('1')
-t.prepend('2')
+dp = Array.new(s.length + 1) { Array.new(t.length + 1, 0) }
 
-dp = Array.new(s.length) { Array.new(t.length, 0) }
-
-s.chars.each_with_index do |s_i, s_idx|
-  t.chars.each_with_index do |t_i, t_idx|
-    if s_i == t_i
-      ary = []
-      (0..(s_idx - 1)).each do |x|
-        (0..(t_idx - 1)).each do |y|
-          ary << dp[x][y]
-        end
-      end
-      dp[s_idx][t_idx] = ary.max + 1
+(0..(s.length)).each do |i|
+  (0..(t.length)).each do |j|
+    if i >= 1 && j >= 1 && s[i-1] == t[j-1]
+      dp[i][j] = [dp[i-1][j], dp[i][j-1], (dp[i-1][j-1] + 1)].max
+    elsif i >= 1 && j >= 1
+      dp[i][j] = [dp[i-1][j], dp[i][j-1]].max
+    elsif i >= 1
+      dp[i][j] = dp[i-1][j]
+    elsif j >= 1
+      dp[i][j] = dp[i][j-1]
     end
   end
 end
 
-p dp.flatten.max
+p dp[-1][-1]
