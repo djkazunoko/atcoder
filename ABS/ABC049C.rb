@@ -1,7 +1,7 @@
 s = gets.chomp
 texts = ['dream', 'dreamer', 'erase', 'eraser']
 t = ''
-res = 'No'
+res = 'NO'
 
 loop do
   before_t_length = t.length
@@ -9,7 +9,7 @@ loop do
   texts.each do |text|
     s_s = s.slice(-(text.length + t.length), text.length)
     if s_s == text
-      t += text
+      t.prepend(text)
       break
     end
   end
@@ -17,8 +17,8 @@ loop do
   after_t_length = t.length
   
   break if before_t_length == after_t_length
-  if s.length == t.length
-    res = 'Yes'
+  if s == t
+    res = 'YES'
     break
   end
 end
