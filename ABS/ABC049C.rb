@@ -1,18 +1,15 @@
 s = gets.chomp
 texts = ['dream', 'dreamer', 'erase', 'eraser']
-res = 'NO'
 
-until s.empty?
-  matched = false
-  texts.each do |t|
-    if s.end_with?(t)
-      s = s[0...-(t.length)]
-      matched = true
-      break
+dp = Array.new(s.length + 1, false)
+dp[0] = true
+
+(1..s.length).each do |i|
+  texts.each do |text|
+    if i >= text.length && dp[i - text.length] && s[(i - text.length), (text.length)] == text
+      dp[i] = true
     end
   end
-  break unless matched
 end
 
-res = 'YES' if s.empty?
-puts res
+puts dp[s.length] ? 'YES' : 'NO'
