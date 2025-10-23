@@ -1,26 +1,18 @@
 s = gets.chomp
 texts = ['dream', 'dreamer', 'erase', 'eraser']
-t = ''
 res = 'NO'
 
-loop do
-  before_t_length = t.length
-
-  texts.each do |text|
-    s_s = s.slice(-(text.length + t.length), text.length)
-    if s_s == text
-      t.prepend(text)
+until s.empty?
+  matched = false
+  texts.each do |t|
+    if s.end_with?(t)
+      s = s[0...-(t.length)]
+      matched = true
       break
     end
   end
-
-  after_t_length = t.length
-  
-  break if before_t_length == after_t_length
-  if s == t
-    res = 'YES'
-    break
-  end
+  break unless matched
 end
 
+res = 'YES' if s.empty?
 puts res
