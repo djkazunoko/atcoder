@@ -1,15 +1,11 @@
 n = gets.to_i
 a = gets.split.map(&:to_i)
 
-count = 0
-(0..(n-3)).each do |i|
-  ((i+1)..(n-2)).each do |j|
-    ((j+1)..(n-1)).each do |k|
-      if [a[i], a[j], a[k]].uniq.length == 2
-        count += 1
-      end
-    end
-  end
-end
+b = Array.new(n, 0)
+a.each { |ai| b[ai - 1] += 1 }
 
-p count
+ans = 0
+b.each do |bi|
+  ans += bi * (bi - 1) * (n - bi) / 2
+end
+puts ans
