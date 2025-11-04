@@ -14,5 +14,5 @@ res = []
   end
 end
 
-p res
+puts res.length
 
