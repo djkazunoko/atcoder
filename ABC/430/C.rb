@@ -3,14 +3,25 @@ s = gets.chomp
 
 res = []
 
-(0..(n-a+1)).each do |l|
-  (l..(n-1)).each do |r|
-    if s[l..r].count('b') >= b
-      break
-    end
-    if s[l..r].count('a') >= a
-      res.push([(l+1), (r+1)])
-    end
+l = 0
+r = b - 1
+
+loop do
+  if s[l..r].count('b') >= b
+    l += 1
+    r = l + (b - 1)
+  end
+  if s[l..r].count('a') >= a
+    res.push([(l+1), (r+1)])
+  end
+  if r < (n - 1)
+    r += 1 
+  else
+    l += 1
+    r = l + (b - 1)
+  end
+  if l > (n-a+1)
+    break
   end
 end
 
