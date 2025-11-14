@@ -1,16 +1,11 @@
 n,k = gets.split.map(&:to_i)
 a = gets.split.map(&:to_i)
 
-ary = []
-a.each do |i|
-  a.each do |j|
-    if i == j
-      next
-    end
-    if (i - j).abs <= k
-      ary.push [i, j]
-    end
-  end
+ans = 0
+(n-1).times do |i|
+  idx = a.bsearch_index { _1 > (a[i] + k) }
+  r = idx ? idx : n
+  ans += r - (i+1)
 end
 
-puts ary.size / 2
+puts ans
