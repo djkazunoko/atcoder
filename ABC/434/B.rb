@@ -1,15 +1,14 @@
 n,m = gets.split.map(&:to_i)
-ab_ary = n.times.map { gets.split.map(&:to_i) }
 
-memo1 = Hash.new(0)
-memo2 = Hash.new(0)
+sum = Array.new((m + 1), 0)
+cnt = Array.new((m + 1), 0)
 
-ab_ary.each do |ab|
-  a,b = ab
-  memo1[a] += b
-  memo2[a] += 1
+n.times do
+  a,b = gets.split.map(&:to_i)
+  sum[a] += b
+  cnt[a] += 1
 end
 
 (1..m).each do |i|
-  puts memo1[i].to_f / memo2[i].to_f
+  puts sum[i].to_f / cnt[i]
 end
