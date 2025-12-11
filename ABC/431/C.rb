@@ -1,20 +1,12 @@
 n,m,k = gets.split.map(&:to_i)
-h_ary = gets.split.map(&:to_i).sort
-b_ary = gets.split.map(&:to_i).sort
+h_ary = gets.split.map(&:to_i)
+b_ary = gets.split.map(&:to_i)
 
-count = 0
+h_ary_light = h_ary.sort[0...k]
+b_ary_heavy = b_ary.sort[-k..-1]
 
-h_ary.each do |h|
-  idx = b_ary.bsearch_index { h <= _1 }
-  if idx == nil
-    break
-  end
-  b_ary.slice!(0..idx)
-  count += 1
+ans = 'Yes'
+k.times do |i|  
+  ans = 'No' if h_ary_light[i] > b_ary_heavy[i]
 end
-
-if count >= k
-  puts 'Yes'
-else
-  puts 'No'
-end
+puts ans
