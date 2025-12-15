@@ -1,12 +1,10 @@
 nums = gets.chomp.chars.map(&:to_i).sort
 
-if nums.include?(0)
-  head = nums.bsearch { _1 > 0 }
-
-  pos = nums.bsearch_index { _1 > 0 }
-  nums.delete_at pos
-
-  nums.unshift head
+nums.length.times do |i|
+  if nums[i] > 0
+    nums[0], nums[i] = nums[i], nums[0]
+    break
+  end
 end
 
 p nums.join.to_i
