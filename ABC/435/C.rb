@@ -1,18 +1,13 @@
 n = gets.to_i
-a_ary = gets.split.map(&:to_i)
+a = gets.split.map(&:to_i)
 
-res = 1
-loop do
-  if a_ary[res - 1] == 1
-    break
+crr = 1
+n.times do |i|
+  if i >= crr
+    puts i
+    exit
   end
-
-  res += a_ary[res - 1] - 1
-
-  if res >= n
-    res = n
-    break
-  end
+  crr = [crr, (i + a[i])].max
 end
 
-puts res
+puts n
