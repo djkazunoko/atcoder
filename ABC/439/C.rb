@@ -1,19 +1,23 @@
 N = gets.to_i
 
-a = []
+c = Array.new(N + 1, 0)
 
-(1..N).each do |n|
-  c = 0
-  (1..(Integer.sqrt(n))).each do |x|
-    yy = n - x * x
-    y = Integer.sqrt(yy)
-    if y > x && (y.to_i * y.to_i == yy)
-      c += 1
-    end
+x = 1
+while (x * x) <= N
+  y = x + 1
+  while (v = x * x + y * y) <= N
+    c[v] += 1
+    y += 1
   end
-  a << n if c == 1
+  x += 1
 end
 
-puts a.size
-puts a.join(' ')
+ans = []
+(1..N).each do |n|
+  if c[n] == 1
+    ans << n
+  end
+end
 
+puts ans.size
+puts ans.join(' ')
