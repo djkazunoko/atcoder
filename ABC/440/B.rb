@@ -1,12 +1,9 @@
 n = gets.to_i
 t_arr =  gets.split.map(&:to_i)
 
-h = Hash.new(0)
-
+ti_arr = []
 n.times do |i|
-  h[i+1] = t_arr[i]
+  ti_arr << [t_arr[i], (i + 1)]
 end
-
-sorted_h =  h.sort_by { |k, v| v }
-ranks = sorted_h.map { _1[0] }
-puts ranks[0..2].join(' ')
+ti_arr_sorted = ti_arr.sort { |a, b| a[0] <=> b[0] }
+puts "#{ti_arr_sorted[0][1]} #{ti_arr_sorted[1][1]} #{ti_arr_sorted[2][1]}"
