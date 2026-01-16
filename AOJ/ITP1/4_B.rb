@@ -1,4 +1,4 @@
-r = gets.to_i
+r = gets.to_f
 
 pi = Math::PI
 s = r * r * pi
