@@ -7,18 +7,10 @@ loop do
     row = ""
 
     (1..w).each do |j|
-      if i.odd?
-        if j.odd?
-          row << "#"
-        else
-          row << "."
-        end
+      if (i.odd? && j.odd?) || (i.even? && j.even?)
+        row << "#"
       else
-        if j.odd?
-          row << "."
-        else
-          row << "#"
-        end
+        row << "."
       end
     end
 
