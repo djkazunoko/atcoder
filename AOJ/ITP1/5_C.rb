@@ -7,7 +7,7 @@ loop do
     row = ""
 
     (1..w).each do |j|
-      if (i.odd? && j.odd?) || (i.even? && j.even?)
+      if (i + j).even?
         row << "#"
       else
         row << "."
