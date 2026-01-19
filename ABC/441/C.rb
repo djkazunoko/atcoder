@@ -5,14 +5,11 @@ a_ary = gets.split.map(&:to_i)
 sake_ary = a_ary.sort[0...k]
 water_ary = a_ary.sort[k..]
 
-# 水が入っている = 酒が0ml
-sake_zero_ary = Array.new(water_ary.size, 0)
-
-sake_ary.concat sake_zero_ary
+# 水のコップを全て選んだとする
+cup = water_ary.size
 
 t_sake_ml = 0
-cup = 0
-sake_ary.sort.each do |sake_ml|
+sake_ary.sort.reverse.each do |sake_ml|
   t_sake_ml += sake_ml
   cup += 1
   if t_sake_ml >= x
