@@ -1,13 +1,15 @@
 n,m = gets.split.map(&:to_i)
 rc_arr = m.times.map { gets.split.map(&:to_i) }
 
-board = Array.new(n+1) {Array.new(n+1, false)}
 res = 0
+occupied_cells = Set.new
+
 rc_arr.each do |rc|
   r,c = rc
-  s = [board[r][c], board[r+1][c], board[r][c+1], board[r+1][c+1]]
-  if s.none?
-    board[r][c], board[r+1][c], board[r][c+1], board[r+1][c+1] = Array.new(4, true)
+  rc_block = [[r, c], [(r + 1), c], [r, (c + 1)], [(r + 1), (c + 1)]]
+
+  if occupied_cells.disjoint?(rc_block)
+    rc_block.map { occupied_cells << _1 }
     res += 1
   end
 end
