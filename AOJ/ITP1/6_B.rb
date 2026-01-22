@@ -22,10 +22,10 @@ end
 
 all_ranks = [*(1..13)]
 
-s_missing = all_ranks.difference(s)
-h_missing = all_ranks.difference(h)
-c_missing = all_ranks.difference(c)
-d_missing = all_ranks.difference(d)
+s_missing = all_ranks - s
+h_missing = all_ranks - h
+c_missing = all_ranks - c
+d_missing = all_ranks - d
 
 s_missing.each do |rank|
   puts "S #{rank}"
