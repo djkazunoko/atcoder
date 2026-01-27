@@ -10,8 +10,7 @@ inst_ary.each do |inst|
     puts str[l..r]
   elsif inst[0] == "reverse"
     rev_str = str[l..r].reverse
-    str.slice!(l..r)
-    str.prepend(rev_str)
+    str[l..r] = rev_str
   elsif inst[0] == "replace"
     str[l..r] = inst[3]
   end
