@@ -1,27 +1,17 @@
 n,m = gets.split.map(&:to_i)
 ab_ary = m.times.map { gets.split.map(&:to_i) }
 
-K = [*1..(n - 1)].combination(3).to_a.size
+c = Array.new(n, n - 1)
 
-h = Hash.new { |hash, key| hash[key] = [] }
 ab_ary.each do |ab|
   a,b = ab
-  h[a] << b
-  h[b] << a
+  c[a - 1] -= 1
+  c[b - 1] -= 1
 end
 
 ans = []
-(1..n).each do |i|
-  if h.key?(i)
-    d = n - (h[i].size + 1)
-    if d < 3
-      ans << 0
-    else
-      ans << [*1..d].combination(3).to_a.size
-    end
-  else
-    ans << K
-  end
+c.each do |i|
+  ans << (i * (i - 1) * (i - 2)) / 6
 end
 
-puts ans.join(' ')
+puts ans*' '
