@@ -9,7 +9,9 @@ n.times do |i|
   restarts << restart
 end
 
-stop = (restarts.uniq.size - 1) * 100
+restarts.shift
+restarts.uniq!
+stop = (restarts.select { _1 < t}.size) * 100
 
 if n == 0
   puts t
