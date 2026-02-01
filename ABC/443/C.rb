@@ -1,20 +1,18 @@
 n,t = gets.split.map(&:to_i)
+
 a = gets.split.map(&:to_i)
 
-restarts = [0]
-restart = 0
-
-n.times do |i|
-  restart = restarts[i] < a[i] ? (a[i] + 100) : restart
-  restarts << restart
+watch = 0
+open = 0
+a.each do |ai|
+  if open < ai
+    watch += ai - open
+    open = ai + 100
+  end
 end
 
-restarts.shift
-restarts.uniq!
-stop = (restarts.select { _1 < t}.size) * 100
-
-if n == 0
-  puts t
-else
-  p t - stop
+if open < t
+  watch += t - open
 end
+
+p watch
