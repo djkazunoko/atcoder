@@ -1,24 +1,24 @@
 n = gets.to_i
 a = gets.split.map(&:to_i).sort
 
-l = []
+def judge(a, l)
+  a = a.dup
+  while !a.empty? && a[-1] == l
+    a.pop
+  end
 
-if n.odd?
-  l << a.last
-else
-  if a.sum % a.last == 0
-    l << a.last
+  n = a.size
+  return if n.odd?
+  
+  (0...(n / 2)).each do |i|
+    return if a[i] + a[n - 1 - i] != l
   end
-  left = a[...(n/2)]
-  right_rev = a[(n/2)..].reverse
 
-  k = []
-  left.size.times do |i|
-    k << left[i] + right_rev[i]
-  end
-  if k.uniq.size == 1
-    l << (a.first + a.last)
-  end
+  l
 end
 
-puts l.sort*' '
+ans = []
+ans << judge(a, a[-1])
+ans << judge(a, (a[0] + a[-1]))
+
+puts ans*' '
