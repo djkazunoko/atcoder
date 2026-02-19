@@ -1,17 +1,14 @@
-s = gets.chomp.chars
-
-acgt = ["A", "C", "G", "T"]
-
+s = gets.chomp
+n = s.size
+t = "ACGT"
 ans = 0
-current = 0
-s.each do |char|
-  if acgt.include?(char)
-    current += 1
-  else
-    current = 0
-  end
 
-  ans = [ans, current].max
+(0...n).each do |l|
+  (l...n).each do |r|
+    if (l..r).all? { |i| t.include?(s[i]) }
+      ans = [ans, r - l + 1].max
+    end
+  end
 end
 
-p ans
+puts ans
