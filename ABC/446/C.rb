@@ -4,27 +4,18 @@ t.times do
   a = gets.split.map(&:to_i)
   b = gets.split.map(&:to_i)
 
-  stock = []
+  q = []
   n.times do |i|
     # 朝
-    stock.push a[i]
+    a[i].times { q << i }
 
     # 昼
-    bi = b[i]
-    n.times do |x|
-      if stock[x] >= bi
-        stock[x] = stock[x] - bi
-        break
-      else
-        bi -= stock[x]
-        stock[x] = 0
-      end
-    end
+    b[i].times { q.shift }
 
     # 夜
-    if i >= d
-      stock.shift
+    while q[0] == (i - d)
+      q.shift
     end
   end
-  puts stock.sum
+  puts q.size
 end
