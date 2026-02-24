@@ -1,15 +1,30 @@
 t = gets.to_i
 t.times do
   n,d = gets.split.map(&:to_i)
-  a_ary = gets.split.map(&:to_i)
-  b_ary = gets.split.map(&:to_i)
+  a = gets.split.map(&:to_i)
+  b = gets.split.map(&:to_i)
 
-  fresh_eggs_lastNight = a_ary[-d..-1]
-  rotten_eggs = a_ary - fresh_eggs_lastNight
-  
-  if rotten_eggs.sum > b_ary.sum
-    puts fresh_eggs_lastNight.sum
-  else
-    puts a_ary.sum - b_ary.sum
+  stock = []
+  n.times do |i|
+    # 朝
+    stock.push a[i]
+
+    # 昼
+    bi = b[i]
+    n.times do |x|
+      if stock[x] >= bi
+        stock[x] = stock[x] - bi
+        break
+      else
+        bi -= stock[x]
+        stock[x] = 0
+      end
+    end
+
+    # 夜
+    if i >= d
+      stock.shift
+    end
   end
+  puts stock.sum
 end
