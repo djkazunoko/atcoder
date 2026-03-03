@@ -1,10 +1,8 @@
 s = gets.chomp
 t = gets.chomp
 
-ans = -1
-if s == t
-  ans = 0
-elsif s.delete("A") == t.delete("A")
+ans = 0
+if s.delete("A") == t.delete("A")
   s_A_cnt = []
   t_A_cnt = []
 
@@ -33,10 +31,11 @@ elsif s.delete("A") == t.delete("A")
     end
   end
 
-  ans = 0
   s_A_cnt.size.times do |i|
     ans += (s_A_cnt[i] - t_A_cnt[i]).abs
   end
+else
+  ans = -1
 end
 
 puts ans
