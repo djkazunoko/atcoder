@@ -1,41 +1,30 @@
 s = gets.chomp
 t = gets.chomp
 
-ans = 0
-if s.delete("A") == t.delete("A")
-  s_A_cnt = []
-  t_A_cnt = []
+def decompose(str)
+  non_a = ''
+  a_cnt = []
+  cnt = 0
 
-  s << '1'
-  t << '1'
-
-  s_left = 0
-  s_right = 0
-  s.chars.each do |c|
+  str.each_char do |c|
     if c == 'A'
-      s_right += 1
+      cnt += 1
     else
-      s_A_cnt << s_right - s_left
-      s_left = s_right
+      a_cnt << cnt
+      cnt = 0
+      non_a << c
     end
   end
 
-  t_left = 0
-  t_right = 0
-  t.chars.each do |c|
-    if c == 'A'
-      t_right += 1
-    else
-      t_A_cnt << t_right - t_left
-      t_left = t_right
-    end
-  end
-
-  s_A_cnt.size.times do |i|
-    ans += (s_A_cnt[i] - t_A_cnt[i]).abs
-  end
-else
-  ans = -1
+  a_cnt << cnt
+  [non_a, a_cnt]
 end
 
-puts ans
+s_non_a, s_a_cnt = decompose(s)
+t_non_a, t_a_cnt = decompose(t)
+
+if s_non_a != t_non_a
+  puts -1
+else
+  puts s_a_cnt.zip(t_a_cnt).sum { |a, b| (a - b).abs }
+end
