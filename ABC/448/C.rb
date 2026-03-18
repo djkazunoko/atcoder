@@ -1,19 +1,16 @@
 n,q = gets.split.map(&:to_i)
-balls = gets.split.map(&:to_i)
+a = gets.split.map(&:to_i)
 
-h = Hash.new(0)
-n.times do |i|
-  h[balls[i]] += 1
-end
-
+a_6 = a.sort[..5]
 q.times do
   k = gets.to_i
-  b_ary = gets.split.map(&:to_i)
-
-  h2 = h.dup
-  k.times do |j|
-    h2[balls[b_ary[j] - 1]] -= 1
+  b = gets.split.map(&:to_i).map{a[_1 - 1]}.sort
+  b << 0
+  (k + 1).times do |i|
+    if a_6[i] != b[i]
+      puts a_6[i]
+      break
+    end
   end
-
-  puts h2.select { |k,v| v != 0 }.keys.min
 end
+
