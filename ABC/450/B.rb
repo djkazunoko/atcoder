@@ -1,14 +1,15 @@
 n = gets.to_i
-c_ary = (n - 1).times.map { gets.split.map(&:to_i) }
+c_ary = (n - 1).times.map do |i|
+  l = Array.new(i + 1, nil)
+  r = gets.split.map(&:to_i)
+  l + r
+end
 
 ans = 'No'
-(1..n).each do |a|
-  ((a + 1)..n).each do |b|
-    ((b + 1)..n).each do |c|
-      c_ab = c_ary[a - 1][b - 1 - a]
-      c_bc = c_ary[b - 1][c - 1 - b]
-      c_ac = c_ary[a - 1][c - 1 - a]
-      if (c_ab + c_bc) < c_ac
+(0...n).each do |a|
+  ((a + 1)...n).each do |b|
+    ((b + 1)...n).each do |c|
+      if (c_ary[a][b] + c_ary[b][c]) < c_ary[a][c]
         ans = 'Yes'
       end
     end
