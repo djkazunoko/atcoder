@@ -1,30 +1,33 @@
 n,m = gets.split.map(&:to_i)
-s = n.times.map { gets.chomp.chars }
+s = n.times.map { gets.chomp }
 
-score = Hash.new(0)
-(1..n).each do |i|
-  score[i] = 0
-end
+pt = Array.new(n, 0)
 
 m.times do |i|
-  vote = []
+  x = 0
+  y = 0
   n.times do |j|
-    vote << s[j][i]
+    if s[j][i] == '0'
+      x += 1
+    else
+      y += 1
+    end
   end
 
-  if vote.count("0") < vote.count("1")
-    vote.each_with_index do |n, idx|
-      if n == "0"
-        score[(idx + 1)] += 1
-      end
-    end
-  else
-    vote.each_with_index do |n, idx|
-      if n == "1"
-        score[(idx + 1)] += 1
-      end
+  n.times do |j|
+    if s[j][i] == '0'
+      pt[j] += 1 if x < y
+    else
+      pt[j] += 1 if x > y
     end
   end
 end
 
-puts score.select { |k,v| v == score.values.max }.keys.sort.join(" ")
+ans = []
+max = pt.max
+n.times do |i|
+  if pt[i] == max
+    ans << i + 1
+  end
+end
+puts ans.join(" ")
