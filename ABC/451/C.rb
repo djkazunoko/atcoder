@@ -1,12 +1,17 @@
+require 'sorted_containers'
+
 q = gets.to_i
 
-woods = []
+woods = SortedContainers::SortedArray.new
+
 q.times do
-  query,h = gets.split.map(&:to_i)
-  if query == 1
+  type, h = gets.split.map(&:to_i)
+  if type == 1
     woods << h
   else
-    woods.reject! { _1 <= h }
+    while !woods.empty? && woods[0] <= h do
+      woods.shift
+    end
   end
   puts woods.size
 end
