@@ -1,33 +1,25 @@
 n = gets.to_i
-ab_ary = n.times.map { gets.split.map(&:to_i) }
+ab = n.times.map { gets.split.map(&:to_i) }
 m = gets.to_i
-s_ary = m.times.map { gets.chomp }
+s = m.times.map { gets.chomp }
 
-set = Set.new
+# has[a][b][char]
+has = Array.new(11) { Array.new(11) { Array.new(26, false) } }
 m.times do |j|
-  s = s_ary[j]
-  size = s.size
-  size.times do |k|
-    pos = k + 1
-    char = s[k]
-    set << [size, pos, char]
+  size = s[j].size
+  s[j].chars.each_with_index do |c, i|
+    has[size][i + 1][c.ord - 'a'.ord] = true
   end
 end
 
 m.times do |j|
-  s = s_ary[j]
   ok = true
-  ok = false if s.size != n
+  ok = false if s[j].size != n
   if ok
     n.times do |i|
-      a,b = ab_ary[i]
-      ok = false if !set.include?([a, b , s[i]])
+      a,b = ab[i]
+      ok = false if !has[a][b][s[j][i].ord - 'a'.ord]
     end
   end
-
-  if ok
-    puts 'Yes'
-  else
-    puts 'No'
-  end
+  puts ok ? 'Yes' : 'No'
 end
