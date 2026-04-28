@@ -1,15 +1,10 @@
-n,m = gets.split.map(&:to_i)
-f = gets.split.map(&:to_i)
+def gi; gets.to_i; end
+def gc; gets.chomp; end
+def gsi; gets.split.map(&:to_i); end
+def pyn(x); puts(x ? 'Yes' : 'No'); end
 
-if f.uniq.size == f.size
-  puts 'Yes'
-else
-  puts 'No'
-end
+n,m = gsi
+f = gsi
 
-if f.uniq.size == m
-  puts 'Yes'
-else
-  puts 'No'
-  
-end
+pyn(f.uniq.size == n)
+pyn(f.uniq.size == m)
