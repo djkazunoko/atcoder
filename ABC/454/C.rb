@@ -1,20 +1,25 @@
-n,m = gets.split.map(&:to_i)
-ab_ary = m.times.map { gets.split.map(&:to_i) }
-
-b_ary = []
-hash = Hash.new { |hash, key| hash[key] = [] }
-ab_ary.each do |ab|
-  a,b = ab
-  b_ary << b
-  hash[b] << a
+def gi; gets.to_i; end
+def gc; gets.chomp; end
+def gsi; gets.split.map(&:to_i); end
+def pyn(x); puts(x ? 'Yes' : 'No'); end
+n,m = gsi
+graph = Array.new(n) {[]}
+m.times do
+  a,b = gsi
+  graph[a - 1] << b - 1
 end
 
-ans = [1]
+visited = Array.new(n, false)
+visited[0] = true
+q = [0]
 
-b_ary.uniq.sort.each do |b|
-  unless (hash[b] & ans).empty?
-    ans << b
+until q.empty? do
+  x = q.shift
+  graph[x].each do |v|
+    next if visited[v]
+    visited[v] = true
+    q << v
   end
 end
 
-puts ans.size
+puts visited.count(true)
