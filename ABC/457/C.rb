@@ -18,15 +18,20 @@ n.times do |i|
 end
 
 # 累積和とKを比較して、対象のaを決める
+if k == s[-1] # KがBの末尾を指す場合(これがないとREする)
+  puts a[-1][-1]
+  exit
+end
+
 k_before_idx = s.bsearch_index { _1 > k } - 1
 k_before = s[k_before_idx]
-if k - k_before == 0
-  # Kが一致した時はtarget_aryの末尾が答え
-  puts a[k_before_idx - 1].last
+
+if k - k_before == 0 # Kが一致した時はtarget_aryの末尾が答え
+  puts a[k_before_idx - 1][-1]
   exit
-else
-  target_ary = a[k_before_idx]
 end
+
+target_ary = a[k_before_idx]
 
 # target_aryの何番目か
 mod = (k - k_before) % target_ary[0]
