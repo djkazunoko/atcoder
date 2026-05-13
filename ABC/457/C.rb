@@ -4,39 +4,15 @@ def gsi; gets.split.map(&:to_i); end
 def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 n,k = gsi
-a = n.times.map {gsi}
+k -= 1
+a = n.times.map { gsi[1..] }
 c = gsi
 
-# L * C の累積和
-l = []
-a.map {l << _1[0]}
-
-lc = l.zip(c).map {_1 * _2}
-s = [0]
 n.times do |i|
-  s << s[i] + lc[i]
-end
-
-# 累積和とKを比較して、対象のaを決める
-if k == s[-1] # KがBの末尾を指す場合(これがないとREする)
-  puts a[-1][-1]
-  exit
-end
-
-k_before_idx = s.bsearch_index { _1 > k } - 1
-k_before = s[k_before_idx]
-
-if k - k_before == 0 # Kが一致した時はtarget_aryの末尾が答え
-  puts a[k_before_idx - 1][-1]
-  exit
-end
-
-target_ary = a[k_before_idx]
-
-# target_aryの何番目か
-mod = (k - k_before) % target_ary[0]
-if mod == 0
-  puts target_ary.last
-else
-  puts target_ary[mod]
+  if k < c[i] * a[i].size
+    puts a[i][k % a[i].size]
+    exit
+  else
+    k -= c[i] * a[i].size
+  end
 end
