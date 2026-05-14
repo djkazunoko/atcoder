@@ -4,7 +4,7 @@ def gsi; gets.split.map(&:to_i); end
 def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 n = gi
-l = n.times.map {gsi}
+a = n.times.map {gsi[1..]}
 x,y = gsi
 
-p l[x-1][y]
+p a[x-1][y-1]
