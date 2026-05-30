@@ -5,23 +5,19 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 h,w = gsi
 
-ans = []
-(1..h).each do |i|
-  row = []
-  (1..w).each do |j|
+di = [-1, 0, 1, 0]
+dj = [0, -1, 0, 1]
+h.times do |i|
+  ans = []
+  w.times do |j|
     cnt = 0
-    (1..h).each do |x|
-      (1..w).each do |y|
-        if (i - x).abs + (j - y).abs == 1
-          cnt += 1
-        end
-      end
+    4.times do |v|
+      ni = i + di[v]
+      nj = j + dj[v]
+      next if ni < 0 || nj < 0 || ni >= h || nj >= w
+      cnt += 1
     end
-    row << cnt
+    ans << cnt
   end
-  ans << row
-end
-
-ans.each do |row|
-  puts row*' '
+  puts ans*' '
 end
