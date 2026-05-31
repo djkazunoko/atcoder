@@ -3,15 +3,12 @@ def gc; gets.chomp; end
 def gsi; gets.split.map(&:to_i); end
 def pyn(x); puts(x ? 'Yes' : 'No'); end
 
-s = gc.chars
+s = gc
+n = s.length
 ans = 0
-s.each_with_index do |char, idx|
-  if char == 'C'
-    if idx < (s.size / 2)
-      ans += (0 - idx).abs + 1
-    else
-      ans += (s.size - idx).abs
-    end
+n.times do |i|
+  if s[i] == 'C'
+    ans += [i+1, n-i].min
   end
 end
 
