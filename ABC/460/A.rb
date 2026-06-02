@@ -7,8 +7,7 @@ n,m = gsi
 
 ans = 0
 while m > 0 do
-  x = n % m
-  m = x
+  m = n % m
   ans += 1
 end
 puts ans
