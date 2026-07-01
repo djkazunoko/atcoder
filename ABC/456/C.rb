@@ -17,4 +17,4 @@ s.each_char do |c|
 end
 
 cnt += (1..substr.size).sum
-puts cnt
+puts cnt % 998244353
