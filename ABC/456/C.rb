@@ -5,16 +5,18 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 s = gc
 
-cnt = 0
-substr = ''
-s.each_char do |c|
-  if substr[-1] == c
-    cnt += (1..substr.size).sum
-    substr = c
-  else
-    substr << c
+start_i = 0
+ans = 0
+
+def f(x)
+  (x * (x + 1)) / 2
+end
+
+(s.size).times do |i|
+  if (i + 1) == s.size || s[i] == s[i + 1]
+    ans += f((i - start_i + 1))
+    start_i = i + 1
   end
 end
 
-cnt += (1..substr.size).sum
-puts cnt % 998244353
+puts ans % 998244353
