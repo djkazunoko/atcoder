@@ -5,15 +5,15 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 x = gi
 
-ans = 'No'
-(1..6).each do |a|
-  (1..6).each do |b|
-    (1..6).each do |c|
-      if a + b + c == x
-        ans = 'Yes'
+def solve(x)
+  (1..6).each do |a|
+    (1..6).each do |b|
+      (1..6).each do |c|
+        return 'Yes' if a + b + c == x
       end
     end
   end
+  'No'
 end
 
-puts ans
+puts solve(x)
