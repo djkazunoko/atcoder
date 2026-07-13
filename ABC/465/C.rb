@@ -6,12 +6,21 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 n = gi
 s = gc
 
-ans = []
+a, b = [],[]
+is_reversed = false
+
 (1..n).each do |i|
-  ans << i
-  if s[i-1] == 'o'
-    ans.reverse!
+  if is_reversed
+    a << i
+  else
+    b << i
+  end
+
+  if s[i - 1] == 'o'
+    is_reversed = !is_reversed
   end
 end
 
+ans = a.reverse! + b
+ans.reverse! if is_reversed
 puts ans*' '
