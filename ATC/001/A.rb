@@ -3,52 +3,42 @@ def gc; gets.chomp; end
 def gsi; gets.split.map(&:to_i); end
 def pyn(x); puts(x ? 'Yes' : 'No'); end
 
-h,w = gsi
-grid = h.times.map {gc}
+H,W = gsi
+grid = H.times.map {gets.chomp.chars}
 
-def dfs(grid, i, j, seen)
-  seen[i][j] = true
-  h = grid.size
-  w = grid[0].size
+DIRECTIONS = [
+  [1, 0],
+  [0, 1],
+  [-1, 0],
+  [0, -1]
+]
 
-  di = [1,0,-1,0]
-  dj = [0,1,0,-1]
+def dfs(i, j, grid, visited)
+  visited[i][j] = true
 
-  4.times do |z|
-    next_i = i + di[z]
-    next_j = j + dj[z]
+  DIRECTIONS.each do |di, dj|
+    next_i = i + di
+    next_j = j + dj
 
-    next unless (0 <= next_i && next_i < h) && (0 <= next_j && next_j < w)
-    next if seen[next_i][next_j]
+    next if (next_i < 0 || next_i >= H || next_j < 0 || next_j >= W)
+    next if grid[next_i][next_j] == '#'
+    next if visited[next_i][next_j]
 
-    next_v = grid[next_i][next_j]
-    if next_v == 'g'
-      seen[next_i][next_j] = true
-    end
-    if next_v == '.'
-      dfs(grid, next_i, next_j, seen)
-    end
+    dfs(next_i, next_j, grid, visited)
   end
 end
 
-seen = Array.new(h) { Array.new(w, false) }
-
-s_i, s_j = nil, nil
-grid.each_with_index do |row, row_idx|
-  col_idx = row.index('s')
-  if col_idx
-    s_i, s_j = row_idx, col_idx
+s = nil
+g = nil
+grid.each_with_index do |row, i|
+  row.each_with_index do |cell, j|
+    s = [i,j] if cell == 's'
+    g = [i,j] if cell == 'g'
   end
 end
 
-g_i, g_j = nil, nil
-grid.each_with_index do |row, row_idx|
-  col_idx = row.index('g')
-  if col_idx
-    g_i, g_j = row_idx, col_idx
-  end
-end
+visited = Array.new(H) { Array.new(W, false) }
 
-dfs(grid, s_i, s_j, seen)
+dfs(s[0], s[1], grid, visited)
 
-pyn(seen[g_i][g_j])
+pyn(visited[g[0]][g[1]])
