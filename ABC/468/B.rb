@@ -6,19 +6,12 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 m,d = gsi
 s = gets.chomp.chars
 
-w = Array.new(m,0)
+ans = 0
 m.times do |i|
-  if s[i] == 'G'
-    if i < d
-      w[0..i] = Array.new(i+1,1)
-      w[i..i+d] = Array.new(d+1,1)
-    elsif i + d >= m
-      w[i-d..i] = Array.new(d+1,1)
-      w[i..-1] = Array.new(m-i,1)
-    else
-      w[i-d,d*2+1] = Array.new(d*2+1,1)
-    end
+  ok = true
+  m.times do |j|
+    ok = false if s[j] == 'G' && (j - i).abs <= d
   end
+  ans += 1 if ok
 end
-
-puts w.count(0)
+puts ans
