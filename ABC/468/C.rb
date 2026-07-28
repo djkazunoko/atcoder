@@ -8,7 +8,7 @@ p = gsi
 q = gsi
 
 ans = 0
-(1..n).to_a.permutation.to_a.each do |ary|
+(1..n).to_a.permutation.each do |ary|
   if (ary <=> p).positive? && (ary <=> q).negative?
     ans += 1
   end
