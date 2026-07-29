@@ -1,8 +1,14 @@
-def dfs(v, graph, color)
+def dfs(v, graph, colors, current_color = 0)
+  colors[v] = current_color
+
   graph[v].each do |to, w|
-    next if color[to] != -1
-    color[to] = w.even? ? color[v] : 1 - color[v]
-    dfs(to, graph, color)
+    next if colors[to] != -1
+
+    if w.even?
+      dfs(to, graph, colors, current_color)
+    else
+      dfs(to, graph, colors, 1 - current_color)
+    end
   end
 end
 
@@ -19,9 +25,8 @@ graph = Array.new(n) {[]}
   graph[v] << [u, w]
 end
 
-color = Array.new(n, -1)
-color[0] = 0
+colors = Array.new(n, -1)
 
-dfs(0, graph, color)
+dfs(0, graph, colors)
 
-puts color
+puts colors
