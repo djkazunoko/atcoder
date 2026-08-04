@@ -5,12 +5,13 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 n = gi
 s = gets.chomp.chars
+s.prepend 'x'
+s.push 'x'
 
 ans = 0
-n.times do |i|
-  if (s[i] == 'x') && (i == 0 || (i != 0 && s[i-1] == 'x')) && (i == n-1 || (i != n-1 && s[i+1] == 'x'))
+(1..n).each do |i|
+  if s[i] == 'x' && s[i-1] == 'x' && s[i+1] == 'x'
     ans += 1
   end
 end
-
 puts ans
