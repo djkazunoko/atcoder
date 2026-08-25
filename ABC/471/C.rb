@@ -6,36 +6,25 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 n = gi
 a = gsi
 
-positive_nums =  a.select {_1 > 0}.sort
-negative_nums =  a.select {_1 < 0}.sort.reverse
+r =  a.select {_1 > 0}.sort
+l =  a.select {_1 < 0}.sort.reverse
+
+INF = 1 << 60
+r.push(INF)
+l.push(-INF)
 
 ans = 0
-position = 0
+pos = 0
 
-positive_idx = 0
-negative_idx = 0
-
-loop do
-  p = positive_nums[positive_idx]
-  n = negative_nums[negative_idx]
-  if p == nil
-    ans += (negative_nums.last - position).abs
-    break
-  elsif n == nil
-    ans += (positive_nums.last - position).abs
-    break
-  end
-
-  p_d = (positive_nums[positive_idx] - position).abs
-  n_d = (negative_nums[negative_idx] - position).abs
-  if p_d < n_d
-    ans += p_d
-    position = p
-    positive_idx += 1
+n.times do |i|
+  if pos - l.first <= r.first - pos
+    ans += pos - l.first
+    pos = l.first
+    l.shift
   else
-    ans += n_d
-    position = n
-    negative_idx += 1
+    ans += r.first - pos
+    pos = r.first
+    r.shift
   end
 end
 
