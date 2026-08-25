@@ -5,13 +5,19 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 a,b = gets.split.map(&:to_f)
 
+hasnine = false
+
 if a + b == 9
-  puts 'Nine'
+  hasnine = true
 elsif a - b == 9
-  puts 'Nine'
+  hasnine = true
 elsif a * b == 9
-  puts 'Nine'
+  hasnine = true
 elsif a / b == 9
+  hasnine = true
+end
+
+if hasnine
   puts 'Nine'
 else
   puts 'Nein'
