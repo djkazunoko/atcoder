@@ -6,8 +6,8 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 n = gi
 a = gsi
 
-positive_nums =  a.select {_1 > 0}
-negative_nums =  a.select {_1 < 0}
+positive_nums =  a.select {_1 > 0}.sort
+negative_nums =  a.select {_1 < 0}.sort.reverse
 
 ans = 0
 position = 0
