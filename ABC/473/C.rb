@@ -7,18 +7,16 @@ n,k = gsi
 a = gsi
 
 ans = 0
-# 各クラスの生徒数(1人以上在籍)
-ary = a.tally.values.sort
-# 最大生徒数
-max = ary[-1]
-# 最大生徒数のクラスの数を答えに足す
-ans += ary.count(max)
+member_counts = Array.new(k,0)
+n.times do |i|
+  member_counts[a[i] - 1] += 1
+end
 
-# 全生徒が1クラスだけに所属している or 生徒数が同率1位のみの場合は以下はスキップ
-if ary.size >= 2 && ary.uniq.size >= 2
-  max_2 = ary.uniq[-2]
-  if max - max_2 == 1
-    ans += ary.count(max_2)
+max = member_counts.max
+
+member_counts.each do |member_count|
+  if member_count >= max - 1
+    ans += 1
   end
 end
 
