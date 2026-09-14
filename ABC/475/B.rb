@@ -6,15 +6,15 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 n = gi
 a = gsi
 
-one = 0
-ten = 0
-hundred = 0
+c1 = 0
+c10 = 0
+c100 = 0
 
 n.times do |i|
   change = (a[i] / 1000.0).ceil * 1000 - a[i]
-  one += change.to_s[-1].to_i
-  ten += change.to_s[-2].to_i
-  hundred += change.to_s[-3].to_i
+  c1 += change % 10
+  c10 += change / 10 % 10
+  c100 += change / 100
 end
 
-puts "#{one} #{ten} #{hundred}"
+puts "#{c1} #{c10} #{c100}"
