@@ -5,11 +5,4 @@ def pyn(x); puts(x ? 'Yes' : 'No'); end
 
 s = gc
 
-ans = ''
-
-s.each_char do |c|
-  ans << c
-  ans << 'o'
-end
-
-puts ans.delete_suffix('o')
+puts s.chars.join('o')
