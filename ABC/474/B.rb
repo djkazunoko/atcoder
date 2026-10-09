@@ -1,14 +1,11 @@
 n = gets.to_i
 p = gets.split.map(&:to_i)
 
-l = 0
-flag = true
-((n / 10) + 1).times do |g|
-  l = g * 10
-  unless p[l..(l+9)].all? {_1 >= (l+1) && _1 <= (l+10)}
-    flag = false
+ans = 'Yes'
+(1..n).each do |i|
+  if (i + 9) / 10 != (p[i-1] + 9) / 10
+    ans = 'No'
     break
   end
 end
-
-puts(flag ? 'Yes' : 'No')
+puts ans
