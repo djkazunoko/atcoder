@@ -1,18 +1,23 @@
 n,w = gets.split.map(&:to_i)
 ab = n.times.map {gets.split.map(&:to_i)}
 
-dp = Array.new(n+1) {Array.new(w+1, -10**15)}
-dp[0][0] = 0
+ans = 0
 
-(1..n).each do |i|
-  a,b = ab[i-1]
-  (0..w).each do |j|
-    if j < b
-      dp[i][j] = dp[i-1][j]
-    else
-      dp[i][j] = [dp[i-1][j], dp[i-1][j-b] + a].max
+(0...2**n).each do |bit|
+  total_a = 0
+  total_b = 0
+
+  n.times do |i|
+    if bit[i] == 1
+      a,b = ab[i]
+      total_a += a
+      total_b += b
     end
+  end
+
+  if total_b <= w
+    ans = [ans, total_a].max
   end
 end
 
-p dp.flatten.max
+puts ans
