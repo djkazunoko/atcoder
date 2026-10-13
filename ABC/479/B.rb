@@ -6,11 +6,10 @@ current = 0
 n.times do |i|
   if s[i] == 'R'
     current += 1
-    ans = [ans, current].max
   else
-    ans = [ans, current].max
     current = 0
   end
+  ans = [ans, current].max
 end
 
 puts ans
