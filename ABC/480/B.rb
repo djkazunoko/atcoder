@@ -7,42 +7,24 @@ n,m = gsi
 s = n.times.map {gc}
 t = m.times.map {gc}
 
-votes = []
-n.times do |i|
-  vote = 0
-  m.times do |j|
-    if s[i] == t[j]
-      vote += 1
-    end
-  end
-  votes << vote
-end
+votes = Array.new(n,0)
 
-m.times do |i|
-  next if s.include?(t[i])
-  tmp = []
-  n.times do |j|
-    if t[i].length == s[j].length
-      same = []
-      t[i].length.times do |k|
-        if t[i][k] == s[j][k]
-          same << true
-        else
-          same << false
-        end
-      end
-      
-      if same.count(false) == 1
-        tmp << s[j]
-      end
-    end
+t.each do |name|
+  if s.include?(name)
+    votes[s.index(name)] += 1
+    next
   end
 
-  if tmp.size == 1
-    votes[s.index(tmp[0])] += 1
+  candidates = []
+
+  s.each_with_index do |candidate, i|
+    next if name.size != candidate.size
+
+    diff = name.size.times.count { name[_1] != candidate[_1] }
+    candidates << i if diff == 1
   end
+
+  votes[candidates[0]] += 1 if candidates.size == 1
 end
 
-votes.each do |vote|
-  puts vote
-end
+puts votes
