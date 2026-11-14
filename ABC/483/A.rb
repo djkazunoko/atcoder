@@ -1,2 +1,2 @@
 n = gets.to_i
-puts (n / 2.0).ceil
+puts (n + 1) / 2
